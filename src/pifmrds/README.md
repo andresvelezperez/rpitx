@@ -35,7 +35,7 @@ Be sure to have git package installed :
 sudo apt-get update
 sudo apt-get install git
 ```
-The PiFmRds project was integrated into rpitx project, clone the source repository and run install script, 
+The PiFmRds project was integrated into rpitx project, clone the source repository and run install script: 
 
 ```sh
 git clone https://github.com/F5OEO/rpitx
