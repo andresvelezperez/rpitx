@@ -28,25 +28,30 @@ Pi-FM-RDS, depends on the `sndfile` library. To install this library on Debian-l
 
 Pi-FM-RDS also depends on the Linux `rpi-mailbox` driver, so you need a recent Linux kernel. The Raspbian releases from August 2015 have this.
 
-**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models, so do not skip the `make clean` step in the instructions below!
+**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models.
 
-Clone the source repository and run `make` in the `src` directory:
+Be sure to have git package installed :
+```sh
+sudo apt-get update
+sudo apt-get install git
+```
+The PiFmRds project was integrated into rpitx project, clone the source repository and run install script, 
 
-```bash
-git clone https://github.com/F5OEO/PiFmRds.git
-cd PiFmRds/src
-git clone https://github.com/F5OEO/librpitx.git
-cd librpitx/src
-make
-cd ../../
-make clean
-make
+```sh
+git clone https://github.com/F5OEO/rpitx
+cd rpitx
+./install.sh
+```
+Make a reboot in order to use **rpitx** in a stable state.
+That's it !
+```sh
+sudo reboot
 ```
 
 Then you can just run:
 
 ```
-sudo ./pi_fm_rds
+sudo ./pifmrds
 ```
 
 This will generate an FM transmission on 107.9 MHz, with default station name (PS), radiotext (RT) and PI-code, without audio. The radiofrequency signal is emitted on GPIO 4 (pin 7 on header P1).
@@ -55,7 +60,7 @@ This will generate an FM transmission on 107.9 MHz, with default station name (P
 You can add monophonic or stereophonic audio by referencing an audio file as follows:
 
 ```
-sudo ./pi_fm_rds -audio sound.wav
+sudo ./pifmrds -audio sound.wav
 ```
 
 To test stereophonic audio, you can try the file `stereo_44100.wav` provided.
@@ -63,7 +68,7 @@ To test stereophonic audio, you can try the file `stereo_44100.wav` provided.
 The more general syntax for running Pi-FM-RDS is as follows:
 
 ```
-pi_fm_rds [-freq freq] [-audio file] [-ppm ppm_error] [-pi pi_code] [-ps ps_text] [-rt rt_text]
+pifmrds [-freq freq] [-audio file] [-ppm ppm_error] [-pi pi_code] [-ps ps_text] [-rt rt_text]
 ```
 
 All arguments are optional:
@@ -93,13 +98,13 @@ One way to measure the ppm error is to play the `pulses.wav` file: it will play 
 If you use the argument `-audio -`, Pi-FM-RDS reads audio data on standard input. This allows you to pipe the output of a program into Pi-FM-RDS. For instance, this can be used to read MP3 files using Sox:
 
 ```
-sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./pi_fm_rds -audio -
+sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./pifmrds -audio -
 ```
 
 Or to pipe the AUX input of a sound card into Pi-FM-RDS:
 
 ```
-sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./pi_fm_rds -audio -
+sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./pifmrds -audio -
 ```
 
 
@@ -111,7 +116,7 @@ Example:
 
 ```
 mkfifo rds_ctl
-sudo ./pi_fm_rds -ctl rds_ctl
+sudo ./pifmrds -ctl rds_ctl
 ```
 
 Then you can send “commands” to change PS, RT and TA:
