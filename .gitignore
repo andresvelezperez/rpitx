@@ -1,3 +1,31 @@
+#
+# rpitx project
+#
+
+# Object files
+*.o
+
+# CSDR
+/csdr/
+
+# librpitx
+/scr/librpitx/
+
+#Others files
+/src/pifmrds/rds_wav
+/corel8
+/foxhunt
+/freedv
+/morse
+/pichirp
+/pifmrds
+/pift8
+/piopera
+/pocsag
+/sendiq
+/sendook
+/spectrumpaint
+/tune
 /piam
 /pidcf77
 /pifm
@@ -5,4 +33,3 @@
 /pissb
 /pisstv
 /rpitx
-*.o
