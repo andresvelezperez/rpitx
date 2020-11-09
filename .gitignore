@@ -6,10 +6,10 @@
 *.o
 
 # CSDR
-/csdr/
+/csdr
 
 # librpitx
-/scr/librpitx/
+/scr/librpitx
 
 #Others files
 /src/pifmrds/rds_wav
